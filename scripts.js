@@ -28,3 +28,8 @@ $('#searchButton').on('click', function() {
     alert("button was clicked");
 });
 
+
+var apiKeyOWM = "bcc2fd2eebd337186fd819184e5d5181";
+var queryURL = "https//api.openweathermap.org/data/2.5/weather?q=" + London + "&APPID=" + apiKeyOWM;
+
+

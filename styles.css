@@ -1,1 +1,16 @@
 /* Weather App */
+
+body {
+    background-color: #f3f3f3;
+}
+
+.list-group-hover .list-group-item:hover {
+    background-color: lightcyan;
+    cursor: pointer;
+}
+
+/* .weatherSearchResult {
+    border: 3px solid red;
+    margin-left: 10px;
+} */
+
