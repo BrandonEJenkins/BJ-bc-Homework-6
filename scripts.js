@@ -24,12 +24,88 @@
 // var searchButtonEl = $('#searchButton');
 
 // Click events
-$('#searchButton').on('click', function() {
-    alert("button was clicked");
+
+
+
+
+
+// When #searcButton clicked run ajax call
+$('#searchButton').click(function(event) {
+    
+    event.preventDefault();
+
+    alert('Search button was clicked...DELETE MY SCRIPT');
+
+    var citySearchInput = $('#citySearchInput').val();
+
+    var stateSearchInput = $('#stateSearchInput').val();
+
+    var apiKeyOWM = "bcc2fd2eebd337186fd819184e5d5181";    
+
+    if (citySearchInput === "" || stateSearchInput === "") {
+        alert('Must enter city AND state to get this bad boy rolling!  Otherwise, all you get is Houston, TX weather results!')
+        citySearchInput = "Houston"
+        stateSearchInput = "Texas"
+    }
+
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearchInput + "," + stateSearchInput + "&units=imperial&APPID=" + apiKeyOWM;
+
+    $.ajax({
+        url: queryURL,
+        method: 'GET'
+    }).then(function (response) {
+        
+        console.log(response);
+        console.log(response.main.temp);
+
+        var responseDiv = $("<div class='queryResult'>");
+    
+        var tempResponse = response.main.temp;
+
+        var windResponse = response.wind.speed;
+
+        var humidityResponse = response.main.humidity;
+
+        var longLocation = response.coord.lon; // Store city longitude to be used in uv index call
+
+        var latLocation = response.coord.lat; // Store city latitude to be used in uv index call
+
+        // var pOne = $('<p>').text(citySearchInput + ", " + stateSearchInput);
+        var pOne = $('<p id="cityTextStyle">').text(citySearchInput + ", " + stateSearchInput);
+    
+        var pTwo = $('<p>').text('Temperature: ' + tempResponse + "\xB0F");
+
+        var pThree = $('<p>').text('Wind Speed: ' + windResponse + "m/s");
+
+        var pFour = $('<p>').text('Humidity: ' + humidityResponse + "%");
+
+        // var pFive = $('<p>').text(wind.speed.value + " " + wind.speed.unit + " " + wind.speed.name);
+
+        var newDivBreak = $('<hr><br>');
+    
+        responseDiv.append(pOne);
+
+        // $('pOne').css('font-size': '18px');
+
+        responseDiv.append(pTwo);
+
+        responseDiv.append(pThree);
+
+        responseDiv.append(pFour);
+
+        // responseDiv.append(pFive);
+
+        responseDiv.append(newDivBreak);
+        
+        $('#weatherSearchResult').append(responseDiv);
+
+        $('.list-group').append('<li class="list-group-item">' + citySearchInput + ", " + stateSearchInput + '</li>');
+    
+    });
+
+    console.group('Search Results');
+    console.log(citySearchInput + ", " + stateSearchInput);
+    console.groupEnd();
+
 });
-
-
-var apiKeyOWM = "bcc2fd2eebd337186fd819184e5d5181";
-var queryURL = "https//api.openweathermap.org/data/2.5/weather?q=" + London + "&APPID=" + apiKeyOWM;
-
 

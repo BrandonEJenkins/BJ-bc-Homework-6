@@ -15,14 +15,18 @@
 <body>
 
     <div class="container" id="cityInputDiv">
-        <div class="row justify-content-center p-3 mb-2 bg-light text-dark rounded">
+        <div class="row jumbotronHeader justify-content-center p-3 mb-2 text-dark rounded">
             <div class="col-sm-8">
 
                 <form>
                     <div class="form-group">
                         <label for="citySearchInput">City Name Search</label>
-                        <input type="text" class="form-control" id="citySearchInput" placeholder="City Name (e.g., London)" aria-describedby="cityInput">
-                        <small id="cityInput" class="form-text text-muted">We will ALWAYS share your info with EVERYONE else...good luck...</small>
+                        <input type="text" class="form-control" id="citySearchInput" placeholder="City Name (e.g., Houston)" aria-describedby="cityInput">
+                        
+                        <label for="stateSearchInput">State Name Search</label>
+                        <input type="text" class="form-control" id="stateSearchInput" placeholder="State Name (e.g., Texas)" aria-describedby="stateInput">
+
+                        <small id="smallFormMessage" class="form-text text-muted">We will ALWAYS share your info with EVERYONE else...good luck...</small>
                     </div>
 
                     <button type="submit" class="btn btn-primary" id="searchButton">Search</button>
@@ -35,7 +39,7 @@
     <div class="container" id="searchHistoryDiv">
         <div class="row">
 
-            <div class=" col-md-5 justify-content-center p-3 mb-2 bg-light text-dark citySearchDiv">
+            <div class=" col-md-5 justify-content-center p-3 mb-2 text-dark citySearchDiv rounded">
                 <div class="cityHistoryArea" id="citySearchHistory">
                     <p>Test Div</p>
                         <ul class="list-group  list-group-hover">
@@ -44,7 +48,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6 offset-md-1 justify-content-center p-3 mb-2 bg-light text-dark weatherSearchResult">
+            <div class="col-md-6 offset-md-1 justify-content-center p-3 mb-2 text-dark rounded" id="weatherSearchResult">
                 <p>Area to display results of ajax call to openweather api.</p>
             </div>
 

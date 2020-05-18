@@ -1,12 +1,13 @@
 /* Weather App */
 
 body {
-    background-color: #f3f3f3;
+    background-color: #f3f3f3fa;
 }
 
 .list-group-hover .list-group-item:hover {
-    background-color: lightcyan;
+    background-color: rgb(149, 161, 167);
     cursor: pointer;
+    color: white;
 }
 
 /* .weatherSearchResult {
@@ -14,3 +15,26 @@ body {
     margin-left: 10px;
 } */
 
+.citySearchDiv {
+    background-color: #ccc;
+}
+
+#weatherSearchResult {
+    background-color: #ccc;
+}
+
+.jumbotronHeader {
+    background-color: #ccc;
+}
+
+.form-control {
+    margin-bottom: 10px;
+}
+
+#cityTextStyle {
+    font-size: 24px;
+}
+
+/* .pOne {
+    font-size: 18px;
+} */
