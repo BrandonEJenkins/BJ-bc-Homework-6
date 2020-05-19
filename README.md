@@ -1,6 +1,12 @@
 # BJ-bc-Homework-6
 Weather app using ajax calls to fetch API data
 
+## GENERAL INFO
+This project is a weather app that provides a variety of metrics and measurements for U.S. cities based on user inputs
+
+## SETUP
+Two ajax calls to the openweathermap API is used to generate a city's temperature, humidity, wind speed, and condition
+
 ## SOURCES
 https://stackoverflow.com/questions/20256516/highlight-list-item-in-bootstrap
 https://stackoverflow.com/questions/21491119/sending-form-text-input-to-console-log-for-testing

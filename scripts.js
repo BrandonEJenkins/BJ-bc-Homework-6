@@ -1,38 +1,19 @@
 // Weather App Script File
 
-// Pseudo Code
-    // Create user city search text area
-    // Get user city search input
-    // Create ajax call to request openweather url data with 'GET' method
-    // Declare variable to store function to get url data
-    // Declare variable to store results of get method
-    // Create function to append user city search history to html element
-    // Create event listener for search button
-    // Create function that creates new unordered list item when url data fetched
-    // Append new unordered list item to existing html element
-    // Create variable to store user city search field input
-    // Declare variable that stores user inputs and concatenates result into url for ajax call
-    // Declare variable that stores base url without the api key and without the specific desired city
-    // Declare variable that stores api key
-    // Create function that triggers if / else statement when search button clicked to check if city name field is empty when and return input required message to user
-    // Declare variable that gets city search text area for use in script
-    // Declare variable that gets search button for use in script
-
-// Get html elements
-// var cityInputEl = $('#citySearchInput');
-// var searchButtonEl = $('#searchButton');
-
-// Click events
+// Browser load and/or refresh instructions
 $( document ).ready( function () {
 
+    // Declare variables to be assigned values later to enable global scope
     var citySearchInput;
 
     var stateSearchInput;
     
+    // Get last city and state search input items from local storage
     var cityStore = window.localStorage.getItem("citySearchInput");
     
     var stateStore = window.localStorage.getItem("stateSearchInput");
     
+
     citySearchInput = cityStore;
     stateSearchInput = stateStore;
 
@@ -42,42 +23,44 @@ $( document ).ready( function () {
     // When #searcButton clicked run ajax call
     $('#searchButton').click(function(event) {
         
+        // Prevent default if button clicked
         event.preventDefault();
     
+        // Clear previous results from five day forecast sections when search button clicked
         $('.fiveDayForecastDiv').empty();
 
+        // Grabs city and state input form values for use in subsequent functions
         citySearchInput = $('#citySearchInput').val();
     
         stateSearchInput = $('#stateSearchInput').val(); 
     
+        // Alerts user that city and state default to Houston Texas if either city or state input form is empty
         if (citySearchInput === "" || stateSearchInput === "") {
             alert('Must enter city AND state to get this bad boy rolling!  Otherwise, all you get is Houston, TX weather results!')
             citySearchInput = "Houston"
             stateSearchInput = "Texas"
         }
-    
+        
+        // Sets last city and state search inputs from local storage
         window.localStorage.setItem("citySearchInput", citySearchInput);
     
         window.localStorage.setItem("stateSearchInput", stateSearchInput);
     
+        // Execute ajax call functions
         getWeather();
         getFiveDay();
     
     });
     
     
-    // window.onbeforeunload = function() {
-    //     this.localStorage.setItem("searchResult", $('#weatherSearchResult').val());
-    // }
-    
-    
     function getWeather() {
     
+        // Store api key and url for weather ajax call
         var apiKeyOWM = "bcc2fd2eebd337186fd819184e5d5181";   
     
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearchInput + "," + stateSearchInput + "&units=imperial&APPID=" + apiKeyOWM;
-    
-    
+        
+        // ajax call to request http data using get method
         $.ajax({
             url: queryURL,
             method: 'GET'
@@ -88,6 +71,7 @@ $( document ).ready( function () {
     
             var responseDiv = $("<div class='queryResult'>");
         
+            // Create variables to store results of ajax call
             var tempResponse = response.main.temp;
     
             var windResponse = response.wind.speed;
@@ -98,15 +82,7 @@ $( document ).ready( function () {
     
             var latLocation = response.coord.lat; // Store city latitude to be used in uv index call
     
-            // var date = new Date();
-            
-            // var month = date.getMonth() + 1;
-            // var day = date.getDate();
-            // var currentDate = date.getFullYear() + '/' +
-            //     (month < 10 ? '0' : '') + month + '/' +
-            //     (day < 10 ? '0' : '') + day;
-    
-            // var pOne = $('<p>').text(citySearchInput + ", " + stateSearchInput);
+            // Creates new p tags for ajax call results to be appended to browser elements later
             var pOne = $('<p id="cityTextStyle">').text(citySearchInput + ", " + stateSearchInput);
         
             var pTwo = $('<p>').text('Temperature: ' + tempResponse + "\xB0F");
@@ -115,12 +91,10 @@ $( document ).ready( function () {
     
             var pFour = $('<p>').text('Humidity: ' + humidityResponse + "%");
     
-            // var pFive = $('<p>').text(wind.speed.value + " " + wind.speed.unit + " " + wind.speed.name);
-    
-            // var pDate = $('<p id="currentDate">').text("(" + currentDate + ")");
-    
+            // Inserts horizontal rule and line break between weather search results sections
             var newDivBreak = $('<hr><br>');
         
+            // Append ajax call p tags to div
             responseDiv.append(pOne);
     
             // $('pOne').css('font-size': '18px');
@@ -136,14 +110,17 @@ $( document ).ready( function () {
             responseDiv.append(newDivBreak);
             
             // $('#weatherSearchResult').append(responseDiv + pDate);
+
+            // Append new div with p tags from ajax results to div in browser
             $('#weatherSearchResult').append(responseDiv);
     
+            // Style search result div to create scroll bar on container overflow
             $('weatherSearchResult').css("overflow-y", "scroll");
-    
+            
+            // Append new li with city and state inputs to browser ul element
             $('.list-group').append('<li class="list-group-item">' + citySearchInput + ", " + stateSearchInput + '</li>');
         
         });
-    
     }
     
     function getFiveDay() {
@@ -159,55 +136,43 @@ $( document ).ready( function () {
                 method: 'GET'
             }).then(function(forecast) {
                 console.log(forecast);
+
                 // console log forecast items: date, an icon representation of weather conditions, the temperature, and the humidity
                 console.log(JSON.stringify(forecast.list[0].main.temp));
                 
+                // For loop to iterate over list array
                 for (let i = 0; i < forecast.list.length; i++) {
                     
                     var noon = "12:00:00";
     
+                    // Variable stores date time for the ith element in the list array
                     var time = forecast.list[i].dt_txt;
     
+                    // if statement that executes steps if dt_txt equals noon
                     if (time.includes(noon)) {
     
-                        // parse object then append to div
-    
-                        // var forecastWeatherDescription = JSON.parse(forecast.list.weather.main);
-                        // var forecastWeatherDescription = JSON.parse(forecast);
-
-                        // var p5DayWeather = $('<p>').text('Weather: ' + forecastWeatherDescription);
-
-                        // $('.weatherCard').append(p5DayWeather);
-
                         console.log(time);
 
                         console.log(forecast.list[0].weather[0].main);
 
-                        // var forecastWeather = JSON.parse(forecast.list[0].weather[0].main);
-
+                        // Create new div to hold p tag results from ajax call
                         var forecastWeatherDiv = $('<div class="col p-2 mx-2 rounded-sm text-white  weatherCard">');
 
+                        // Store ajax call results in variable to be appeneded to browser
                         var forecastWeatherEl = forecast.list[i].weather[0].main;
 
+                        // Create new p tag with text property 
                         var pForecastWeather = $('<p>').text('Weather: ' + forecastWeatherEl);
 
+                        // Append p tag with ajax results to new div
                         forecastWeatherDiv.append(pForecastWeather);
 
+
+                        // Append div with p tag to div in browser
                         $('.fiveDayForecastDiv').append(forecastWeatherDiv);
-
-
-                        // var forecastWeather = forecast.list[0].weather[0].main;
-
-                        // var pWeather = $('<p class="forecastDivContents">').text('Conditions: ' + forecastWeather);
-
-                        // $('.weatherCard').append(pWeather);
                     }
-    
                 }
                 console.log(JSON.stringify(forecast.list[0].main.temp));
-    
-                // var pForecast = forecast.split
-    
             });
     }
 })
