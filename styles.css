@@ -1,7 +1,25 @@
 /* Weather App */
 
 body {
-    background-color: #f3f3f3fa;
+    /* background-color: #f3f3f3fa; */
+    background-color: #ff4e00;
+    background-image: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);
+}
+
+.navbar-header {
+    /* background-color: darkgray; */
+    float: none; 
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+}
+
+.navbar-brand {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    float: none;
+    padding: 0;
 }
 
 .list-group-hover .list-group-item:hover {
@@ -16,15 +34,42 @@ body {
 } */
 
 .citySearchDiv {
-    background-color: #ccc;
+    background-color: white;
+    box-shadow: -3px 4px 5px darkgray;
+    height: 350px;
+    overflow: scroll;
+}
+
+#searchHistoryTitle {
+    font-size: 24px;
 }
 
 #weatherSearchResult {
-    background-color: #ccc;
+    background-color: white;
+    box-shadow: -3px 4px 5px darkgray;
+    height: 350px;
+    overflow: scroll;
 }
 
+.fiveDayForecast {
+    background-color: white;
+    box-shadow: -3px 4px 5px darkgray;
+    height: 400px;
+    overflow: scroll;
+}
+
+#resultDivTitle {
+    font-size: 24px;
+}
+
+/* #cityInputDiv {
+    box-shadow: 3px 3px 10px 5px #2b2d2f;
+    border-radius: 10px;
+} */
+
 .jumbotronHeader {
-    background-color: #ccc;
+    background-color: white;
+    box-shadow: -3px 4px 5px darkgray;
 }
 
 .form-control {
@@ -34,6 +79,22 @@ body {
 #cityTextStyle {
     font-size: 24px;
 }
+
+/* .navbar {
+    box-shadow: 0px 3px 8px 4px darkgray;
+} */
+
+.weatherCard {
+    display: inline-block;
+    background-color: #007BFF;
+    border: none;
+    font-size: 18px;
+    height: 250px;
+}
+
+/* .bg-light {
+    background: darkgray
+} */
 
 /* .pOne {
     font-size: 18px;

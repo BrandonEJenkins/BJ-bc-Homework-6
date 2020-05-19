@@ -14,8 +14,15 @@
 </head>
 <body>
 
+    <nav class="navbar navbar-nav navbar-expand-lg navbar-light bg-dark">
+        <div class="navbar-header">
+            <a class="navbar-brand text-white">Weather Dashboard</a>
+        </div>
+    </nav>
+
+    
     <div class="container" id="cityInputDiv">
-        <div class="row jumbotronHeader justify-content-center p-3 mb-2 text-dark rounded">
+        <div class="row jumbotronHeader justify-content-center p-3 my-5 text-dark rounded-lg">
             <div class="col-sm-8">
 
                 <form>
@@ -39,28 +46,58 @@
     <div class="container" id="searchHistoryDiv">
         <div class="row">
 
-            <div class=" col-md-5 justify-content-center p-3 mb-2 text-dark citySearchDiv rounded">
+            <div class=" col-md-5 justify-content-center p-3 mb-5 text-dark citySearchDiv rounded-lg">
                 <div class="cityHistoryArea" id="citySearchHistory">
-                    <p>Test Div</p>
+                    <p id="searchHistoryTitle">City Search History</p>
                         <ul class="list-group  list-group-hover">
-                            <li class="list-group-item">Test List Item</li>
+                            <!-- <li class="list-group-item">Test List Item</li> -->
                         </ul>
                 </div>
             </div>
 
-            <div class="col-md-6 offset-md-1 justify-content-center p-3 mb-2 text-dark rounded" id="weatherSearchResult">
-                <p>Area to display results of ajax call to openweather api.</p>
+            <div class="col-md-6 offset-md-1 justify-content-center p-3 mb-5 text-dark rounded-lg" id="weatherSearchResult">
+                <p id="resultDivTitle">Weather Conditions</p>
             </div>
 
         </div><!-- row -->
     </div><!-- #searchHistoryDiv -->
 
-    <script>
 
-        // Pseudo Code 
-            // 
+    <div class="container">
+        <div class="row p-3 mb-5 text-dark rounded-lg fiveDayForecast">
+            <div class="col">
+                                                    
+                <h1>5-Day Forecast</h1>
 
-    </script>
+                <p>Our forecasts are AT LEAST 30% accurate!</p>
+                    
+                    <div class="row fiveDayForecastDiv">
+
+                        <!-- <div class="col p-2 mx-2 rounded-sm text-white  weatherCard">
+                            <p>Sub div</p>
+                        </div>
+                        
+                        <div class="col p-2 mx-2 rounded-sm text-white weatherCard">
+                            <p>Sub div</p>
+                        </div>
+                        
+                        <div class=" col p-2 mx-2 rounded-sm text-white weatherCard">
+                            <p>Sub div</p>
+                        </div>
+
+                        <div class="col p-2 mx-2 rounded-sm text-white weatherCard">
+                            <p>Sub div</p>
+                        </div>
+
+                        <div class="col p-2 mx-2 rounded-sm text-white weatherCard">
+                            <p>Sub div</p>
+                        </div> -->
+                    
+                    </div>
+
+            </div>
+        </div><!-- #fiveDayForecast -->
+    </div>
 
 
 
