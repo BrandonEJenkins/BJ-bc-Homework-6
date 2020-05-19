@@ -167,6 +167,23 @@ $( document ).ready( function () {
                         // Append p tag with ajax results to new div
                         forecastWeatherDiv.append(pForecastWeather);
 
+                        // Store ajax call results in variable to be appeneded to browser
+                        var forecastTempEl = forecast.list[i].main.temp;
+
+                        // Create new p tag with text property 
+                        var pForecastTemp = $('<p>').text('Temperature: ' + forecastTempEl + '\xB0F');
+
+                        // Append p tag with ajax results to new div
+                        forecastWeatherDiv.append(pForecastTemp);
+
+                        // Store ajax call results in variable to be appeneded to browser
+                        var forecastHumEl = forecast.list[i].main.humidity;
+
+                        // Create new p tag with text property 
+                        var pForecastHum = $('<p>').text('Humidity: ' + forecastHumEl + '%');
+
+                        // Append p tag with ajax results to new div
+                        forecastWeatherDiv.append(pForecastHum);
 
                         // Append div with p tag to div in browser
                         $('.fiveDayForecastDiv').append(forecastWeatherDiv);
