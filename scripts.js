@@ -43,52 +43,46 @@ $( document ).ready( function () {
         
         // Sets last city and state search inputs from local storage
         window.localStorage.setItem("citySearchInput", citySearchInput);
-    
         window.localStorage.setItem("stateSearchInput", stateSearchInput);
-    
+
         // Execute ajax call functions
         getWeather();
         getFiveDay();
     
     });
-    
-    
+
+    $('.list-group').on('click', '.list-group-item', function(event) {
+        console.log('click me');
+    });
+
     function getWeather() {
-    
+
         // Store api key and url for weather ajax call
         var apiKeyOWM = "bcc2fd2eebd337186fd819184e5d5181";   
-    
+
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearchInput + "," + stateSearchInput + "&units=imperial&APPID=" + apiKeyOWM;
-        
+
         // ajax call to request http data using get method
         $.ajax({
             url: queryURL,
             method: 'GET'
         }).then(function (response) {
-            
+
             console.log(response);
             console.log(response.main.temp);
-    
             var responseDiv = $("<div class='queryResult'>");
         
             // Create variables to store results of ajax call
             var tempResponse = response.main.temp;
-    
             var windResponse = response.wind.speed;
-    
             var humidityResponse = response.main.humidity;
-    
             var longLocation = response.coord.lon; // Store city longitude to be used in uv index call
-    
             var latLocation = response.coord.lat; // Store city latitude to be used in uv index call
     
             // Creates new p tags for ajax call results to be appended to browser elements later
             var pOne = $('<p id="cityTextStyle">').text(citySearchInput + ", " + stateSearchInput);
-        
             var pTwo = $('<p>').text('Temperature: ' + tempResponse + "\xB0F");
-    
             var pThree = $('<p>').text('Wind Speed: ' + windResponse + "m/s");
-    
             var pFour = $('<p>').text('Humidity: ' + humidityResponse + "%");
     
             // Inserts horizontal rule and line break between weather search results sections
@@ -96,21 +90,11 @@ $( document ).ready( function () {
         
             // Append ajax call p tags to div
             responseDiv.append(pOne);
-    
-            // $('pOne').css('font-size': '18px');
-    
             responseDiv.append(pTwo);
-    
             responseDiv.append(pThree);
-    
             responseDiv.append(pFour);
-    
-            // responseDiv.append(pFive);
-    
             responseDiv.append(newDivBreak);
-            
-            // $('#weatherSearchResult').append(responseDiv + pDate);
-
+    
             // Append new div with p tags from ajax results to div in browser
             $('#weatherSearchResult').append(responseDiv);
     
@@ -119,17 +103,17 @@ $( document ).ready( function () {
             
             // Append new li with city and state inputs to browser ul element
             $('.list-group').append('<li class="list-group-item">' + citySearchInput + ", " + stateSearchInput + '</li>');
-        
+
         });
     }
-    
+
     function getFiveDay() {
     
         var apiKeyOWM = "bcc2fd2eebd337186fd819184e5d5181";   
-    
+
         // url query for 5 day forecast
         var queryFiveDayURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + citySearchInput + "," + stateSearchInput + "&units=imperial&appid=" + apiKeyOWM;
-    
+
             // ajax call for 5 day forecast
             $.ajax({
                 url: queryFiveDayURL,
@@ -144,15 +128,13 @@ $( document ).ready( function () {
                 for (let i = 0; i < forecast.list.length; i++) {
                     
                     var noon = "12:00:00";
-    
+
                     // Variable stores date time for the ith element in the list array
                     var time = forecast.list[i].dt_txt;
-    
+
                     // if statement that executes steps if dt_txt equals noon
                     if (time.includes(noon)) {
-    
                         console.log(time);
-
                         console.log(forecast.list[0].weather[0].main);
 
                         // Create new div to hold p tag results from ajax call
